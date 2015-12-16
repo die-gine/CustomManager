@@ -1,0 +1,56 @@
+$(document).ready(function() {
+	
+	$('#recording_save_as_json').click(function() {
+	
+	var test = $('#rec_json');
+	for (var name in test) {
+		  alert(name);
+		}
+	
+	
+	
+	
+	
+	
+		$('#output').text(JSON.stringify({
+	
+			title_user_story:$('#title_user_story').html(),
+			given : {
+						"definition" : $('#rec_step_def_json').html(),
+						"url" : $('#rec_step_def_json').html(),
+						"targeturl" : $('#rec_step_def_json').html(),
+						"value" : $('#rec_url_json').html()
+
+				},
+			"when" : {	
+						"name" : "I set my login name 'admin'",
+						"value" : "<input id='name'></input>"					
+				},
+			"then" : {
+						"name" : "I can read 'Welcome admin' on the site",
+						"value" : "http://localhost:8180/CustomManagerWeb/login.xhtml"
+				}
+	
+		}));
+	});
+	createJSON();
+	
+	function createJSON() {
+    jsonObj = [];
+    $('.rec_output_json').each(function() {
+
+        var url = $(this).children('#rec_url_json').html();
+        var definition = $(this).children('#rec_step_def_json').html();
+		//alert(definition);
+
+        item = {}
+        item ["url"] = url;
+        item ["definition"] = definition;
+
+        jsonObj.push(item);
+    });
+
+    console.log(JSON.stringify(jsonObj));
+}
+	
+});
